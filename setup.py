@@ -171,7 +171,8 @@ def get_mpi_flags():
     show_command = os.environ.get('HOROVOD_MPICXX_SHOW', 'mpicxx -show')
 
     try:
-        proc = subprocess.Popen(shlex.split(show_command), env=dict(os.environ), stdout=subprocess.PIPE)
+        proc = subprocess.Popen(shlex.split(show_command), env=dict(os.environ),
+                                stdout=subprocess.PIPE, universal_newlines=True)
         mpi_show_output = proc.communicate()[0]
         mpi_show_args = shlex.split(mpi_show_output)
         if not mpi_show_args[0].startswith('-'):
